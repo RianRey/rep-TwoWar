@@ -1,5 +1,56 @@
 #include <stdio.h>
 
+int otv_1;
+int point;
+char saved[2];
+
 main()
 {
+  
+}
+void SaveInfo()
+{
+  FILE *out;
+  char buf[2];
+  out = fopen("info.txt", "wb");
+  buf[0] = otv_1;
+  fputs(buf, out)
+  fclose(out);
+  out = fopen("point.txt", "wb");
+  buf[0] = point;
+  if(saved == 2)
+  {
+    buf[1] = saved[0];
+    buf[2] = saved[1];
+  }
+  if(saved == 1)
+  {
+    buf[1] = saved[0];
+  }
+  fclose(out);
+}
+void LoadInfo()
+{
+  FILE *in;
+  char buf[2];
+  in = fopen("info.txt", "rb");
+  fgets(in, 2,in);
+  fclose(in);
+  otv_1 = (int)buf[0];
+  in = fopen("point.txt", "rb");
+  fgets(buf, 3, in);
+  point = (int)buf[0];
+  if(saved == 1)
+  {
+    saved[0] = buf[1];
+  }
+  if(saved == 2)
+  {
+    saved[0] = buf[1];
+    saved[0] = buf[2];
+  }
+}
+void Block1()
+{
+  
 }
