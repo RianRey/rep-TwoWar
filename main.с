@@ -4,9 +4,19 @@ int otv_1;
 int point;
 char saved[2];
 
+int LoadInfo();
+void SaveInfo();
+void ClearInfo();
+void Block1();
+
 main()
 {
-  
+  int errorcode = LoadInfo();
+  if(errorcode == 0) 
+  {
+    ClearInfo();
+    SaveInfo();
+  }
 }
 void SaveInfo()
 {
@@ -29,15 +39,17 @@ void SaveInfo()
   }
   fclose(out);
 }
-void LoadInfo()
+int LoadInfo()
 {
   FILE *in;
   char buf[2];
   in = fopen("info.txt", "rb");
+  if(in == NULL) return 0;
   fgets(in, 2,in);
   fclose(in);
   otv_1 = (int)buf[0];
   in = fopen("point.txt", "rb");
+  if(in == NULL) return 0;
   fgets(buf, 3, in);
   point = (int)buf[0];
   if(saved == 1)
@@ -49,6 +61,14 @@ void LoadInfo()
     saved[0] = buf[1];
     saved[0] = buf[2];
   }
+  return 1;
+}
+void ClearInfo()
+{
+  otv_1 = 0;
+  point = 0;
+  saved[0] = '0';
+  saved[1] = '0';
 }
 void Block1()
 {
